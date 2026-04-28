@@ -348,9 +348,7 @@ def load_all():
     embedding_dim = 50
     rnn_units     = 128
 
-    max_len = pickle.load(open(
-        r"C:\Users\nitin gupta\next_word_predictor_app\max_len_new.pkl", "rb"
-    ))
+    max_len = pickle.load(open("max_len_new.pkl", "rb"))
 
     model = Sequential([
         Embedding(input_dim=vocab_size, output_dim=embedding_dim, input_length=max_len),
@@ -359,15 +357,11 @@ def load_all():
     ])
     model.build(input_shape=(None, max_len))
 
-    weights = np.load(
-        r"C:\Users\nitin gupta\next_word_predictor_app\lstm_weights.npy",
-        allow_pickle=True
-    )
+    weights = np.load("lstm_weights.npy", allow_pickle=True)
     model.set_weights(weights)
 
-    tokenizer_data = pickle.load(open(
-        r"C:\Users\nitin gupta\next_word_predictor_app\tokenizer_data.pkl", "rb"
-    ))
+    tokenizer_data = pickle.load(open("tokenizer_data.pkl", "rb"))
+
 
     tokenizer = KerasTokenizer(num_words=vocab_size)
     tokenizer.word_index = tokenizer_data["word_index"]
